@@ -45,8 +45,6 @@ get_header(); ?>
 
 
 <script>
-
-
 </script>
 
 
