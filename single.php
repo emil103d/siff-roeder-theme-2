@@ -192,6 +192,7 @@ get_header(); ?>
 <div class="stort-billede">
 	<button class="knap_left">&lt;</button>
 	<img class="main-billede" id="img" src="" alt="">
+	<div id="arrayImages"></div>
 	 <button class="knap_right">&gt;</button> 
 </div>
 
@@ -284,7 +285,7 @@ async function getJson() {
 	const data = await fetch(dbUrl);
 	produkt = await data.json();		
 	visProdukt();
-	showimage();
+	showImages()
 
 	// hent relaterede produkter
 	const relaUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt?per_page=100";
@@ -313,35 +314,48 @@ function visProdukt() {
 }
 
 
+//--------------------- Billede Galleri-----------------
 
-// let index = 0;
-// let the_image = document.getElementById("main-image");
+// function showImages(){
+// const img1 = document.querySelector(".main-billede").src = produkt.main_billede.guid;
+// const img2 = document.querySelector(".ekstra_billede").src = produkt.ekstra_billede.guid;
+// const img3 = document.querySelector(".bagfra_billede").src = produkt.bagfra_.guid;
+// const img4 = document.querySelector(".forfra_billede").src = produkt.forfra_billede.guid;
+// }
 
-//  document.querySelector(".knap_left").addEventListener("click", prevImage);
-// document.querySelector(".knap_right").addEventListener("click", nextImage);
+// let images = [ "img1", "img2", "img3", "img4"]
+// let arrayImagesElement = document.getElementById("arrayImages")
 
-// let images = [img1, img2, img3, img4];
-// the_image = images[0];
+// function createImageNode(){
+// var img = document.createElement('img');
+// img.src = showimage
+// return img;
+// }
+
+// images.forEach(img => {
+// 	arrayImagesElement.appendChild(createImageNode(img));
+// });
 
 
-function showimage(){
+
+function showImages(){
 const img1 = document.querySelector(".main-billede").src = produkt.main_billede.guid;
 const img2 = document.querySelector(".ekstra_billede").src = produkt.ekstra_billede.guid;
 const img3 = document.querySelector(".bagfra_billede").src = produkt.bagfra_.guid;
 const img4 = document.querySelector(".forfra_billede").src = produkt.forfra_billede.guid;
-}
+
 
 let count = 0;
 let slides = [ "img1", "img2", "img3", "img4"]
 
 
-const billede = document.createElement("img");
-      billede.src = slides[count];
-      document.body.appendChild(billede);
+const billedegalleri = document.querySelector("stort-billede");
+billede.src = slides[count];
 
-      const btn = document.querySelector(".knap_left").addEventListener("click", nextbillede);
+const btn = document.querySelector(".knap_left").addEventListener("click", nextbillede);
 
       function nextbillede() {
+		  console.log("hejigen");
         if (count == slides.length - 1) {
           count = 0;
           billede.src = slides[count];
@@ -351,8 +365,7 @@ const billede = document.createElement("img");
           billede.src = slides[count];
         }
 	}
-
-	
+}
 
 		// function nextbillede() {
         // if (count == slides.length - 1) {
@@ -364,25 +377,6 @@ const billede = document.createElement("img");
         //   billede.src = slides[count];
         // }
 
-
-//  let images = [], x = -1;
-//       images[0] = "img1";
-//       images[1] = "img2";
-// 	  images[3] = "img3";
-// 	  images[4] = "img4";
-
-//  document.querySelector(".knap_left").addEventListener("click", displayNextImage);
-// document.querySelector(".knap_right").addEventListener("click", displayPreviousImage);
-
-// function displayNextImage() {
-//           x = (x === images.length - 1) ? 0 : x + 1;
-//           document.getElementById("img").src = images[x];
-//       }
-
-// function displayPreviousImage() {
-//           x = (x <= 0) ? images.length - 1 : x - 1;
-//           document.getElementById("img").src = images[x];
-//       }
 
 
 
@@ -413,7 +407,7 @@ function visRelaProdukter() {
 	const kasse = document.querySelector("#kasse")
 	kasse.textContent= "";
 	relaProdukter.forEach(relaProdukt => {
-		if (produkt.kategori.includes(73)) {
+		if (produkt.categories.includes(7) && kursus.farve == "beige")  {
 		const klon = temp.cloneNode(true).content;
     	klon.querySelector(".main_billede").src = produkt.main_billede.guid;
 		klon.querySelector(".navn").textContent = produkt.title.rendered;
