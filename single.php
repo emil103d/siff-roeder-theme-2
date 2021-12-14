@@ -192,7 +192,6 @@ get_header(); ?>
 <div class="stort-billede">
 	<button class="knap_left">&lt;</button>
 	<img class="main-billede" id="img" src="" alt="">
-	<div id="arrayImages"></div>
 	 <button class="knap_right">&gt;</button> 
 </div>
 
@@ -202,7 +201,7 @@ get_header(); ?>
 <p class="maerke"></p>
 <p class="pasform"></p>
 <p class="materiale"></p>
-<p class="farve"></p>
+<p class="farve">Farver:</p>
 <p class="storrelse"></p>
 <p class="modellen_er"></p>
 <div class="knapper">
@@ -271,7 +270,9 @@ get_header(); ?>
 
 let temp = document.querySelector("template");
 const liste = document.querySelector("#produkt-oversigt");
-let produkter;
+let produkter = [];
+let farver;
+let storrelser;
 let filter= "alle";
 start();
 	
@@ -284,28 +285,48 @@ async function getJson() {
 	const dbUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt/"+<?php echo get_the_ID() ?>;
 	const data = await fetch(dbUrl);
 	produkt = await data.json();		
-	visProdukt();
-	showImages()
 
-	// hent relaterede produkter
-	const relaUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt?per_page=100";
-	const relaData = await fetch(relaUrl);
-	relaProdukter = await relaData.json();
-	visRelaProdukter();
+	const farveUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/farve";
+	const farveData = await fetch(farveUrl);
+	farver = await farveData.json();
+
+	const strUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/strrelse";
+	const strData = await fetch(strUrl);
+	storrelser = await strData.json();	
+
+	visProdukt();
+	visFarve();
+	visStr();
+	visRelaProdukter();	
 
 }
 
 //--------------------- Hvis single produkt ---------------
 
+	let img1 ;
+	let img2 ;
+	let img3 ;
+	let img4 ;
 
 function visProdukt() { 
+	console.log(produkt);
+	img1 = produkt.main_billede.guid;
+	img2 = produkt.ekstra_billede.guid;
+	img3 = produkt.bagfra_.guid;
+	img4 = produkt.forfra_billede.guid;
+
+	document.querySelector(".main-billede").src = img1;
+	document.querySelector(".ekstra_billede").src = img2;
+	document.querySelector(".bagfra_billede").src = img3;
+	document.querySelector(".forfra_billede").src = img4;
+
 	document.querySelector(".navn").textContent = produkt.title.rendered;
 	document.querySelector(".koster").textContent = produkt.koster + " kr. ";
 
 	document.querySelector(".maerke").textContent ="Mærke: " + produkt.mrke;
 	document.querySelector(".pasform").textContent ="Pasform: " + produkt.pasform;
 	document.querySelector(".materiale").textContent ="Materiale: " + produkt.materiale;
-	document.querySelector(".farve").textContent ="Farve: " + produkt.farve;
+	// document.querySelector(".farve").textContent ="Farve: " + produkt.farve.name;
 	document.querySelector(".storrelse").textContent ="Størrelse: " + produkt.strrelse;
 	document.querySelector(".modellen_er").textContent = produkt.modellen_er;
 
@@ -313,50 +334,63 @@ function visProdukt() {
 	document.querySelector(".vaskeanvisning").textContent = produkt.vaskeanvisning;
 }
 
+//--------------------- Vis farve-----------------
+
+function visFarve(){
+	farver.forEach(color=>{
+		if (produkt.farve.includes(parseInt(color.id)))
+		document.querySelector(".farve").innerHTML += `<button data-farve="${color.id}">${color.name}</button>`
+	})
+	console.log("hej med");
+}
+
+//--------------------- Vis str-----------------
+
+function visStr(){
+	storrelser.forEach(storrelse=>{
+		if (produkt.farve.includes(parseInt(storrelse.id)))
+		document.querySelector(".farve").innerHTML += `<button data-farve="${color.id}">${color.name}</button>`
+	})
+	console.log("hej med");
+}
 
 //--------------------- Billede Galleri-----------------
 
-// function showImages(){
-// const img1 = document.querySelector(".main-billede").src = produkt.main_billede.guid;
-// const img2 = document.querySelector(".ekstra_billede").src = produkt.ekstra_billede.guid;
-// const img3 = document.querySelector(".bagfra_billede").src = produkt.bagfra_.guid;
-// const img4 = document.querySelector(".forfra_billede").src = produkt.forfra_billede.guid;
-// }
+let count= 0;
+let billede = document.querySelector(".main-billede");
+const btn1 = document.querySelector(".knap_left").addEventListener("click", prevbillede);
+const btn2 = document.querySelector(".knap_right").addEventListener("click", nextbillede);
 
-// let images = [ "img1", "img2", "img3", "img4"]
-// let arrayImagesElement = document.getElementById("arrayImages")
+      function prevbillede() {
+		
+		let slides = [img1, img2, img3, img4]
+		console.log(slides);
 
-// function createImageNode(){
-// var img = document.createElement('img');
-// img.src = showimage
-// return img;
-// }
+		if (count >= 1) {
+        if (count == slides.length -1) {
+          count = 0;
+          billede.src = slides[count];
+          return;
+        } else {
+          count--;
+          billede.src = slides[count];
+        }
+		}else if (count == 0) {
+			count=3;
+			billede.src = slides[count];
+		}
 
-// images.forEach(img => {
-// 	arrayImagesElement.appendChild(createImageNode(img));
-// });
-
-
-
-function showImages(){
-const img1 = document.querySelector(".main-billede").src = produkt.main_billede.guid;
-const img2 = document.querySelector(".ekstra_billede").src = produkt.ekstra_billede.guid;
-const img3 = document.querySelector(".bagfra_billede").src = produkt.bagfra_.guid;
-const img4 = document.querySelector(".forfra_billede").src = produkt.forfra_billede.guid;
-
-
-let count = 0;
-let slides = [ "img1", "img2", "img3", "img4"]
+		console.log(count);
+	}
 
 
-const billedegalleri = document.querySelector("stort-billede");
-billede.src = slides[count];
 
-const btn = document.querySelector(".knap_left").addEventListener("click", nextbillede);
+	function nextbillede() {
+		
+		let slides = [img1, img2, img3, img4]
+		console.log(slides);
 
-      function nextbillede() {
-		  console.log("hejigen");
-        if (count == slides.length - 1) {
+        if (count == slides.length -1) {
           count = 0;
           billede.src = slides[count];
           return;
@@ -364,20 +398,9 @@ const btn = document.querySelector(".knap_left").addEventListener("click", nextb
           count++;
           billede.src = slides[count];
         }
+
+		console.log(count);
 	}
-}
-
-		// function nextbillede() {
-        // if (count == slides.length - 1) {
-        //   count = 0;
-        //   billede.src = slides[count];
-        //   return;
-        // } else {
-        //   count++;
-        //   billede.src = slides[count];
-        // }
-
-
 
 
 
@@ -403,24 +426,41 @@ function toggleHarmonika() {
 
 //---------------------Hvis relaterede produkter -----------------
 
+const filteredItems = produkter.filter((produkt) => {
+			return produkt.koster <= 900
+			console.log(filteredItems)
+		})
+
 function visRelaProdukter() {
 	const kasse = document.querySelector("#kasse")
 	kasse.textContent= "";
-	relaProdukter.forEach(relaProdukt => {
-		if (produkt.categories.includes(7) && kursus.farve == "beige")  {
-		const klon = temp.cloneNode(true).content;
-    	klon.querySelector(".main_billede").src = produkt.main_billede.guid;
-		klon.querySelector(".navn").textContent = produkt.title.rendered;
-		klon.querySelector(".koster").textContent = produkt.koster + " kr. ";
-		klon.querySelector(".mere").addEventListener("click", () => 
-			{location.href = produkt.link;
-			});
-      	kasse.appendChild(klon);
-    }
+	produkter.forEach(produkt => {
+		if (produkt == filteredItems)  {
+			const klon = temp.cloneNode(true).content;
+			klon.querySelector(".main_billede").src = produkt.main_billede.guid;
+			klon.querySelector(".navn").textContent = produkt.title.rendered;
+			klon.querySelector(".koster").textContent = produkt.koster + " kr. ";
+			klon.querySelector(".mere").addEventListener("click", () => 
+				{location.href = produkt.link;
+				});
+			kasse.appendChild(klon);
+		
+	
+
+		// if (produkt.categories.includes(7) && kursus.farve == "beige")  {
+		// const klon = temp.cloneNode(true).content;
+    	// klon.querySelector(".main_billede").src = produkt.main_billede.guid;
+		// klon.querySelector(".navn").textContent = produkt.title.rendered;
+		// klon.querySelector(".koster").textContent = produkt.koster + " kr. ";
+		// klon.querySelector(".mere").addEventListener("click", () => 
+		// 	{location.href = produkt.link;
+		// 	});
+      	// kasse.appendChild(klon);
+    //}
+		}
 	})
+
 }
-
-
 </script>
 
 
