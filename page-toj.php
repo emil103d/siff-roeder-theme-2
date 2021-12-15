@@ -52,8 +52,8 @@ img {
       }
 
 .parent {
-  width: 20rem;
   padding: 4rem;
+  width: 20rem;
 }
 
 .filter .filter-item { /*Linje under knap*/
@@ -141,20 +141,14 @@ img {
   font-size: 0.6125rem;
 }
 
-.alle_produkter {
+.page_toj {
 	margin: 20px;
 }
 
-.alle_produkter h1{
+.page_toj h1{
 	font-size: 2.5rem;
 	margin: auto;
 	text-align: center;
-}
-
-/*------------ Basis layout------------ */
-
-#produkter-oversigt {
-  margin-top: 30px;
 }
 
 .navn {
@@ -173,21 +167,20 @@ img {
   grid-column: 1; 
 }
 
-#produkter-oversigt {
+.produkter-oversigt {
   grid-column: 2;
 }
 
 }
 
-
 </style>
 
 
-<main class="alle_produkter">
-	<h1>Alle Produkter</h1>
-<section id="page_wrapper">
-<!-- ----------Filter knapper ------------->
+<main class="page_toj"> 
 
+<h1>Tøj</h1>
+<!-- ----------Filter knapper ------------->
+<section id="page_wrapper">
 <div class="parent">
 		<div class="filter">
 			<div class="filter-item">
@@ -258,13 +251,15 @@ img {
 				</div>
 		</div> 
 	</div>
-	  <button class="nulstil">Nulstil</button>
+
+  <button class="nulstil">Nulstil</button>
+
 </div> 
 </div> 
 
 <!-- ----------produkter-oversigt ------------->
 
-<section id="produkter-oversigt"></section>
+<section id="produkter-oversigt"></section> 
 </section>
 <template>
 <article class="enkelt_produkt">
@@ -281,8 +276,6 @@ img {
 </article>
 </template>
 
-</div>
-
 </main>
 
 
@@ -292,13 +285,14 @@ let temp = document.querySelector("template");
 const liste = document.querySelector("#produkter-oversigt");
 
 let produkter = [];
-let kategorier = [];
+let tojer = [];
 let farver = [];
 let maerker = [];
 let storrelser = [];
 let priser = [];
 
-let filterCat = "alle";
+
+let filterTojer = "alle";
 let filterFarve = "alle";
 let filterMrke = "alle";
 let filterStr = "alle";
@@ -317,10 +311,6 @@ start();
 	let data = await fetch(url);
 	produkter = await data.json();
 
-	// hent type produkt
-	const katUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/kategori"; // indsæt url for at hente alle kategori 
-	let katData = await fetch(katUrl);
-	kategorier = await katData.json();
 
 	// hent farve produkt
 	const farveUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/farve"; // indsæt url for at hente alle farve 
@@ -342,7 +332,10 @@ start();
 	const prisData = await fetch(prisUrl);
 	priser = await prisData.json();	
 
-	
+		// hent tøj produkt 
+	const tojUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/toj";
+	const tojData = await fetch(tojUrl);
+	tojer = await tojData.json();	
 
 
 	visProdukter();
@@ -358,7 +351,7 @@ function visProdukter() {
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&
 			 (filterStr == "alle" || produkt.strrelse.includes(parseInt(filterStr))) &&
 			 (filterPris == "alle" || produkt.pris.includes(parseInt(filterPris))) &&
-			 (filterCat == "alle" || produkt.kategori.includes(parseInt(filterCat))))    { //parseInt= laver datatypen om til et helt tal
+			 (filterTojer == "alle" || produkt.toj.includes(parseInt(filterTojer))))    { //parseInt= laver datatypen om til et helt tal
 		const klon = temp.cloneNode(true).content;
 		klon.querySelector("img").src = produkt.main_billede.guid;
 		klon.querySelector(".navn").textContent = produkt.title.rendered;
@@ -403,9 +396,9 @@ function visProdukter() {
             })
 			  addEventListenersToButtons();
 		
-		kategorier.forEach(kategori=>{
-		  if(kategori.name != "Ikke-kategoriseret"){
-     		document.querySelector(".dropdown-content6").innerHTML += `<button class="filter" data-kategori="${kategori.id}">${kategori.name}</button>`
+		tojer.forEach(toj=>{
+		  if(toj.name != "Ikke-kategoriseret"){
+     		document.querySelector(".dropdown-content6").innerHTML += `<button class="filter" data-toj="${toj.id}">${toj.name}</button>`
                 }
             })
 			  addEventListenersToButtons();	  
@@ -453,7 +446,7 @@ function addEventListenersToButtons() {
             })
 
 			document.querySelectorAll(".dropdown-content6 button").forEach(elm => {
-                elm.addEventListener("click", filtreringType);
+                elm.addEventListener("click", filtreringToj);
             })
 
        }
@@ -541,8 +534,8 @@ function filtreringPris() {
 
 	//-- ----------Type filtrering ------------->
 
-function filtreringType() {
-        filterCat = this.dataset.kategori;
+function filtreringToj() {
+        filterTojer = this.dataset.toj;
             document.querySelectorAll("dropdown-content6 .filter").forEach(elm => {
                 elm.classList.remove("valgt");
             });
@@ -552,10 +545,9 @@ function filtreringType() {
             visProdukter();
         }
 
-document.querySelector(".nulstil").addEventListener("click", funcNulstil);
-
-
 	//-- ----------Nulstil ------------->
+
+  document.querySelector(".nulstil").addEventListener("click", funcNulstil);
 
 function funcNulstil() {
   filterPris = "alle";

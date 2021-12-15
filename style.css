@@ -5,3 +5,7 @@ Version: 1
 Description: astra child theme
 Author: Gruppe_5
 */
+
+.maerker {
+  display: inline-flex;
+}
