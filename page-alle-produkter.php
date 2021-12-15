@@ -46,9 +46,8 @@ img {
 /*------------ Filter knapper------------ */
 
  .valgt {
-        background-color: red;
-        border-color: #FFC502;
-        border-style: solid;
+        font-weight: 800;
+		background: #b38b7329;
       }
 
 .parent {
@@ -68,9 +67,6 @@ img {
   text-align: left;
   width: 100%;
   padding: 1em 0;
-  border: none;
-  background: none;
-  outline: none;
 }
 .filter button:hover, .filter button:focus { /*Pseudo elementer der gør at når man har klikket eller kører musen over skifter den farve */
   cursor: pointer;
@@ -132,6 +128,9 @@ img {
   transition: opacity 200ms linear, max-height 200ms linear;
 }
 
+.filter button:hover {
+	background: #b38b7329; 
+}
 .filter-item button {
  font-weight: 400;
 }
@@ -162,6 +161,31 @@ img {
 	margin-top: 10px;
 }
 
+ /* ------------Til toppen----------------- */
+
+        #btnScrollToTop {
+        position: fixed;
+        right: 1px;
+        bottom: 35px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #b38b7382;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        color: white;
+        outline: none;
+        border: none;
+        cursor: pointer;
+		padding: 0;
+		z-index: 150;
+        }
+
+        #btnScrollToTop:active {
+        background: #b38b739e;
+        }
+
+		  
+
 @media (min-width:600px)  { 
 
 #page_wrapper {
@@ -177,7 +201,11 @@ img {
   grid-column: 2;
 }
 
-}
+ #btnScrollToTop {
+          right: 2vw; 
+      }
+      }
+
 
 
 </style>
@@ -282,6 +310,10 @@ img {
 </template>
 
 </div>
+
+  <button id="btnScrollToTop">
+        <i class="material-icons">arrow_upward</i>
+      </button>
 
 </main>
 
@@ -566,6 +598,18 @@ function funcNulstil() {
 
   visProdukter()
 }
+
+	//-- ----------ScrollToTop ------------->
+const ScrollToTop = document.querySelector("#btnScrollToTop");
+
+ScrollToTop.addEventListener("click", () => {
+  // window.scrollTo(0, 0);
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 
 </script>
 

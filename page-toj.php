@@ -156,6 +156,29 @@ img {
 	margin-top: 10px;
 }
 
+/* ------------Til toppen----------------- */
+
+        #btnScrollToTop {
+        position: fixed;
+        right: 1px;
+        bottom: 35px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #b38b7382;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        color: white;
+        outline: none;
+        border: none;
+        cursor: pointer;
+		padding: 0;
+		z-index: 150;
+        }
+
+        #btnScrollToTop:active {
+        background: #b38b739e;
+        }
+
 @media (min-width:600px)  { 
 
 #page_wrapper {
@@ -170,6 +193,10 @@ img {
 .produkter-oversigt {
   grid-column: 2;
 }
+
+ #btnScrollToTop {
+          right: 2vw; 
+      }
 
 }
 
@@ -275,6 +302,11 @@ img {
 </div>
 </article>
 </template>
+
+  <button id="btnScrollToTop">
+        <i class="material-icons">arrow_upward</i>
+      </button>
+
 
 </main>
 
@@ -558,6 +590,18 @@ function funcNulstil() {
 
   visProdukter()
 }
+
+//-- ----------ScrollToTop ------------->
+const ScrollToTop = document.querySelector("#btnScrollToTop");
+
+ScrollToTop.addEventListener("click", () => {
+  // window.scrollTo(0, 0);
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+});
 
 </script>
 
