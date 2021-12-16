@@ -16,7 +16,6 @@ get_header(); ?>
 
 <style>
 
-
 :root {
 	--text: #7F7F7F;
 	--green: #7F7F7F;
@@ -255,6 +254,34 @@ grid-column: 2;
 		margin-left: 3rem;
       }
 
+ .knapper .hjerteValgt{
+	display: none;
+}
+
+.knapper .reserver {
+	border: solid 0.5px #26222f;
+}
+
+
+.h3 {
+	margin-top: 4rem;
+	text-align: center 
+}
+
+	 /* ------------------ Relaterede produkt------------ */
+
+ .rela h4 {
+	text-align: center;
+	
+}
+
+.mere {
+	display: block; 
+	margin: 0 auto;
+	border: solid 0.5px #26222f;
+	
+} 
+
 	 /* ------------------ MOBILE ABOWE - WEB BELOW ------------ */
 @media (min-width:600px)  { 
 
@@ -317,10 +344,12 @@ grid-column: 2;
 	}
 
 
+
+
 /* ------------Relaterede produkter -------------*/
 
 .rela_section {
-	margin: 1rem auto;
+	margin: 1rem 2rem;
 		grid-column: 1 / 3;
 }
 
@@ -354,26 +383,6 @@ grid-column: 2;
 }
 }
 
-/* @media (max-width:600px)  { 
-
-.single_produkt {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto;
-	margin: 1rem auto;
-	gap: 25px;
-}
-
-.stort-billede {
-	grid-column: 1;
-	grid-row: 
-}
-
-.billeder {
-	display: none;
-}
-
- } */
 
 
 </style>
@@ -410,7 +419,12 @@ grid-column: 2;
 	<p class="modellen_er"></p>
 	<div class="knapper">
 	<button class="reserver">Reserver </button>
-	<button class="hjerte">Love</button>
+	  <button class="hjerte">
+       <span class="material-icons">favorite_border</span>
+      </button>
+	  <button class="hjerteValgt">
+       <span class="material-icons">favorite</span>
+      </button>
 	</div>
 
 <!----------------- Harmonika  ----------------------->
@@ -751,6 +765,24 @@ function visRelaProdukter() {
 			}
 		})
 }
+
+//-- ----------Hjerte ------------->
+
+const love = document.querySelector(".hjerte");
+const loveValg = document.querySelector(".hjerteValgt");
+
+love.addEventListener("click", () => {
+	love.style.display = "none";
+	loveValg.style.display = "block";
+  });
+
+loveValg.addEventListener("click", () => {
+	loveValg.style.display = "none";
+	love.style.display = "block";
+  });
+
+
+
 </script>
 
 

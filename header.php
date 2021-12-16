@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+ <link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() ?>/custom.css ">
 
 <?php wp_head(); ?>
 <?php astra_head_bottom(); ?>

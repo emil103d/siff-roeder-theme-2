@@ -1,7 +1,175 @@
+/* ------------------------------------ Single produkter  ------------------------------------ */
+
 img {
   max-width: 100%;
   height: auto;
 }
+
+#produkter-oversigt {
+  display: grid;
+  justify-content: center;
+  gap: 25px;
+  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.enkelt_produkt {
+  max-width: 1200px;
+  display: grid;
+  text-align: center;
+  margin: auto;
+}
+
+/*------------ Filter knapper------------ */
+
+.valgt {
+  background-color: red;
+  border-color: #ffc502;
+  border-style: solid;
+}
+
+.parent {
+  padding: 4rem;
+  width: 20rem;
+}
+
+.filter .filter-item {
+  /*Linje under knap*/
+  border-bottom: 1px solid var(--grey);
+}
+.filter .filter-item button[aria-expanded="true"] {
+  /*Linje under tekst når knappen er expanded*/
+  border-bottom: 1px solid var(--green);
+}
+.filter button {
+  /*basis layout af knappen*/
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  border: none;
+  background: none;
+  outline: none;
+}
+.filter button:hover,
+.filter button:focus {
+  /*Pseudo elementer der gør at når man har klikket eller kører musen over skifter den farve */
+  cursor: pointer;
+  color: var(--green);
+}
+.filter button:hover::after,
+.filter button:focus::after {
+  cursor: pointer;
+  color: var(--green);
+  border: 1px solid #03b5d2;
+}
+.filter button .filter-title {
+  padding: 1em 1.5em 1em 0;
+}
+.filter button .icon {
+  /*Her bliver ikonet bygget (cirklen)*/
+  display: inline-block;
+  position: absolute;
+  top: 14px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+.filter button .icon::before {
+  /*Vertikal stregen inden i cirklen */
+  display: block;
+  position: absolute;
+  content: "";
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor; /*parent elementets farve */
+}
+.filter button .icon::after {
+  /*Horizontal stregen inden i cirklen*/
+  display: block;
+  position: absolute;
+  content: "";
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+}
+.filter button[aria-expanded="true"] {
+  /*Dette virker kun hvis aria-expeneded er true*/
+  color: var(--green);
+}
+.filter button[aria-expanded="true"] .icon::after {
+  /*Inden i knappen går man til ikonet og ændre after så hvis man har trykket på knapper forsvinder stregen*/
+  width: 0;
+}
+.filter button[aria-expanded="true"] + .filter-content {
+  /*Hvis aria expanded er true skal harmonika content kunne ses (teksten)*/
+  opacity: 1;
+  max-height: 30em;
+  transition: all 200ms linear;
+}
+.filter .filter-content {
+  /*Som default (grundlæggende) skal teksten ikke kunne ses*/
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+}
+
+.filter-item button {
+  font-weight: 400;
+}
+
+.filter-content button {
+  font-weight: 400;
+  font-size: 0.6125rem;
+}
+
+.page_toj {
+  margin: 20px;
+}
+
+.page_toj h1 {
+  font-size: 2.5rem;
+  margin: auto;
+  text-align: center;
+}
+
+.navn {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+/* ------------Til toppen----------------- */
+
+#btnScrollToTop {
+  position: fixed;
+  right: 1px;
+  bottom: 35px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #b38b7382;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 150;
+}
+
+#btnScrollToTop:active {
+  background: #b38b739e;
+}
+
+/* ------------------------------------ Alle Produkter  ------------------------------------ */
 
 #produkter-oversigt {
   display: grid;
@@ -171,6 +339,8 @@ img {
 #btnScrollToTop:active {
   background: #b38b739e;
 }
+
+/* ------------------------------------ Mobile above / Web below  ------------------------------------ */
 
 @media (min-width: 600px) {
   #page_wrapper {
