@@ -30,6 +30,10 @@ get_header(); ?>
 	display: none;
 }
 
+.knapper .material-icons {
+    font-size: 40px;
+}
+
 .knap_left {
     position: absolute;
     left: 0; bottom: 50%;
@@ -39,7 +43,8 @@ get_header(); ?>
     position: absolute;
     right: 0; bottom: 50%;
  }
- 
+
+
  .stort-billede {
 	position: relative;
 }
@@ -400,9 +405,13 @@ grid-column: 2;
 </div>
 
 <div class="stort-billede">
-	<button class="knap_left">&lt;</button>
+	<button class="knap_left"> <span class="material-icons">
+navigate_before
+</span></button>
 	<img class="main-billede" id="img" src="" alt="">
-	 <button class="knap_right">&gt;</button> 
+	 <button class="knap_right"><span class="material-icons">
+navigate_next
+</span></button> 
 </div>
 
 <div class="info">
@@ -621,14 +630,15 @@ function visFarve(){
 		document.querySelector(".farve").innerHTML += `<button data-farve="${color.id}">${color.name}</button>`
             })
 
-	// document.querySelectorAll(".farve button").addEventListener("click", funcValgt);
+	 document.querySelector(".farve button").addEventListener("click", funcValgt);
 
 }
 
-// function funcValgt() {
-//     console.log("anders");
-// }
+function funcValgt() {
+    console.log("anders");
+}
 
+// lav eventlisterner inden i størrelse funktionen der lytter til alle buttons  fjerne alle classes og  tilføj en classs
 
 //--------------------- Vis str-----------------
 
@@ -644,7 +654,14 @@ function visStr(){
 		if (produkt.strrelse.includes(parseInt(storrelse.id)))
 		document.querySelector(".storrelse").innerHTML += `<button data-strrelse="${storrelse.id}">${storrelse.name}</button>`
 	})
+
+	let strKnapper = document.querySelectorAll(".storrelse button");
+	strKnapper.forEach(strKnap => {
+		strKnap.addEventListener("click", funcValgt);
+	})
 }
+
+
 
 //--------------------- Vis mærker-----------------
 
