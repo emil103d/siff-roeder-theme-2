@@ -21,6 +21,105 @@ get_header(); ?>
 
 <style>
 
+  .filter button {
+    /*basis layout af knappen*/
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 2em 0;
+	font-size: 1rem;
+  }
+
+  .filter button .icon {
+  /*Her bliver ikonet bygget (cirklen)*/
+  display: inline-block;
+  position: absolute;
+  top: 14px;
+  right: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+
+	.filter button .icon::before {
+  /*Vertikal stregen inden i cirklen */
+  display: block;
+  position: absolute;
+  content: "";
+  top: 20px;
+  left: 13px;
+  width: 17px;
+  height: 2px;
+  background: currentColor; /*parent elementets farve */
+}
+.filter button .icon::after {
+  /*Horizontal stregen inden i cirklen*/
+  display: block;
+  position: absolute;
+  content: "";
+  top: 13px;
+  left: 20px;
+  width: 2px;
+  height: 17px;
+  background: currentColor;
+}
+
+.enkelt_produkt {
+  max-width: 1200px;
+  display: grid;
+  text-align: center;
+  margin: 0;
+}
+
+button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type=reset]:hover, input[type=reset]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+	text-decoration: underline;
+	background-color: transparent;
+ }
+
+ @media (min-width: 600px) {
+  #page_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+  }
+
+    .filter button {
+    /*basis layout af knappen*/
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+  }
+
+  .filter button .icon::before {
+    /*Vertikal stregen inden i cirklen */
+    top: 9px;
+    left: 5px;
+    width: 10px;
+    height: 2px;
+    background: currentColor; /*parent elementets farve */
+  }
+  .filter button .icon::after {
+    /*Horizontal stregen inden i cirklen*/
+    top: 5px;
+    left: 9px;
+    width: 2px;
+    height: 10px;
+  }
+
+    .filter button .icon {
+  /*Her bliver ikonet bygget (cirklen)*/
+  width: 22px;
+  height: 22px;
+
+}
+
+}
+
+ 
+
 </style>
 
 
@@ -136,12 +235,12 @@ get_header(); ?>
 let temp = document.querySelector("template");
 const liste = document.querySelector("#produkter-oversigt");
 
-let produkter = [];
-let kategorier = [];
-let farver = [];
-let maerker = [];
-let storrelser = [];
-let priser = [];
+// let produkter = [];
+// let kategorier = [];
+// let farver = [];
+// let maerker = [];
+// let storrelser = [];
+// let priser = [];
 
 let filterCat = "alle";
 let filterFarve = "alle";
@@ -158,7 +257,7 @@ start();
 	async function getJson() {
 
 	// hent produkt
-	const url = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt/?per_page=100"; // indsæt url for at hente alle produkter
+	const url = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt/?per_page=100"; 
 	let data = await fetch(url);
 	produkter = await data.json();
 
@@ -234,7 +333,8 @@ function visProdukter() {
             })
 			  addEventListenersToButtons();
 
-		storrelser.forEach(strrelse=>{
+
+		sorterFunc(storrelser).forEach(strrelse=>{
 		  if(strrelse.name != "Ikke-kategoriseret"){
      		document.querySelector(".dropdown-content4").innerHTML += `<button class="filter" data-strrelse="${strrelse.id}">${strrelse.name}</button>`
                 }
@@ -256,6 +356,15 @@ function visProdukter() {
 			  addEventListenersToButtons();	  
 
 		}
+
+
+// Her skal storrelser løbes igennem og sorteres som i single produkt
+function sorterFunc(array){
+	array.sort((a,b) => {
+	return a.id - b.id;
+});
+return array;
+}
 	
 
 //-- ----------Lav harmonika ------------->
@@ -370,6 +479,7 @@ function filtreringStr() {
             this.classList.add("valgt");
             visProdukter();
         }
+
 
 	//-- ----------Pris filtrering ------------->
 

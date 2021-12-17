@@ -21,6 +21,12 @@ get_header(); ?>
 
 <style>
 
+h1 {
+  font-size: 2.5rem;
+  margin: auto;
+  text-align: center;
+}
+
 </style>
 
 

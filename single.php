@@ -634,19 +634,13 @@ function visFarve(){
 
 }
 
-function funcValgt() {
-    console.log("anders");
-}
-
-// lav eventlisterner inden i størrelse funktionen der lytter til alle buttons  fjerne alle classes og  tilføj en classs
-
 //--------------------- Vis str-----------------
 
 function funcStr(){
 	storrelser.sort((a,b) => {
 	return a.id - b.id;
-});
-visStr()
+	});
+		visStr()
 }
 
 function visStr(){
@@ -661,7 +655,14 @@ function visStr(){
 	})
 }
 
+function funcValgt() {
+    console.log("anders");
+	 this.classList.remove("valgt");
+           // tilføj .valgt til den valgte
+            this.classList.add("valgt");
+}
 
+// lav eventlisterner inden i størrelse funktionen der lytter til alle buttons  fjerne alle classes og  tilføj en classs
 
 //--------------------- Vis mærker-----------------
 
