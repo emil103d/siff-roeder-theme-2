@@ -1,3 +1,11 @@
+/* Version 1.6 */
+
+:root {
+  --text: #7f7f7f;
+  --grey: #56605f;
+  --green: #647658;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -16,6 +24,25 @@ img {
   display: grid;
   text-align: center;
   margin: 0;
+}
+
+/*          Fjern fokus  */
+button:focus,
+.menu-toggle:hover,
+button:hover,
+.ast-button:hover,
+.ast-custom-button:hover .button:hover,
+.ast-custom-button:hover,
+input[type="reset"]:hover,
+input[type="reset"]:focus,
+input#submit:hover,
+input#submit:focus,
+input[type="button"]:hover,
+input[type="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  text-decoration: underline;
+  background-color: transparent;
 }
 
 /*------------ Filter knapper------------ */
@@ -39,13 +66,14 @@ img {
   /*Linje under tekst når knappen er expanded*/
   border-bottom: 1px solid var(--green);
 }
+
 .filter button {
   /*basis layout af knappen*/
   position: relative;
   display: block;
   text-align: left;
   width: 100%;
-  padding: 2em 0;
+  padding: 1rem 0;
   border: none;
   background: none;
   outline: none;
@@ -72,8 +100,8 @@ img {
   position: absolute;
   top: 14px;
   right: 0;
-  width: 48px;
-  height: 48px;
+  width: 22px;
+  height: 22px;
   border: 1px solid;
   border-radius: 22px;
 }
@@ -82,20 +110,21 @@ img {
   display: block;
   position: absolute;
   content: "";
-  top: 20px;
-  left: 13px;
-  width: 17px;
+  top: 9px;
+  left: 5px;
+  width: 10px;
   height: 2px;
   background: currentColor; /*parent elementets farve */
 }
+
 .filter button .icon::after {
   /*Horizontal stregen inden i cirklen*/
   display: block;
   position: absolute;
   content: "";
-  top: 13px;
-  left: 13px;
-  width: 17px;
+  top: 5px;
+  left: 9px;
+  width: 2px;
   height: 10px;
   background: currentColor;
 }
@@ -362,15 +391,6 @@ img {
   }
 
   /* knapper ------- */
-
-  .filter button {
-    /*basis layout af knappen*/
-    position: relative;
-    display: block;
-    text-align: left;
-    width: 100%;
-    padding: 1em 0;
-  }
 
   .filter button .icon::before {
     /*Vertikal stregen inden i cirklen */
