@@ -70,7 +70,7 @@ filter-button-1 {
 <div class="parent">
 		<div class="filter">
 			<div class="filter-item">
-			<button id="filter-button-1" aria-expanded="false">
+			<button id="filter-button-1" class="filter-knapper" aria-expanded="false">
 			<span class="filter-title>">Sortér</span>
 			<span class="icon" aria-hidden="true"></span>
 			</button>
@@ -84,7 +84,7 @@ filter-button-1 {
 			</div>
 
 		<div class="filter-item">
-			<button id="filter-button-4" aria-expanded="false">
+			<button id="filter-button-4" class="filter-knapper" aria-expanded="false">
 				<span class="filter-title>">Type</span>
 				<span class="icon" aria-hidden="true"></span>
 				</button>
@@ -95,7 +95,7 @@ filter-button-1 {
 	</div>
 
 	<div class="filter-item">
-		<button id="filter-button-2" aria-expanded="false">
+		<button id="filter-button-2" class="filter-knapper" aria-expanded="false">
 			<span class="filter-title>">Farve</span>
 			<span class="icon" aria-hidden="true"></span>
 			</button>
@@ -106,7 +106,7 @@ filter-button-1 {
 	</div> 
 
 	<div class="filter-item">
-		<button id="filter-button-3" aria-expanded="false">
+		<button id="filter-button-3" class="filter-knapper" aria-expanded="false">
 			<span class="filter-title>">Mærke</span>
 			<span class="icon" aria-hidden="true"></span>
 			</button>
@@ -117,7 +117,7 @@ filter-button-1 {
 	</div> 
 
 	<div class="filter-item">
-		<button id="filter-button-4" aria-expanded="false">
+		<button id="filter-button-4" class="filter-knapper" aria-expanded="false">
 			<span class="filter-title>">Størrelse</span>
 			<span class="icon" aria-hidden="true"></span>
 			</button>
@@ -128,7 +128,7 @@ filter-button-1 {
 </div>
 
 	<div class="filter-item">
-			<button id="filter-button-4" aria-expanded="false">
+			<button id="filter-button-4" class="filter-knapper" aria-expanded="false">
 				<span class="filter-title>">Pris</span>
 				<span class="icon" aria-hidden="true"></span>
 				</button>
@@ -174,12 +174,6 @@ filter-button-1 {
 let temp = document.querySelector("template");
 const liste = document.querySelector("#produkter-oversigt");
 
-// let produkter = [];
-// let kategorier = [];
-// let farver = [];
-// let maerker = [];
-// let storrelser = [];
-// let priser = [];
 
 let filterCat = "alle";
 let filterFarve = "alle";
@@ -235,7 +229,7 @@ start();
 	
 function visProdukter() { 
 	console.log("hej");
-	liste.textContent= ""; //Tøm visningscontainer efter hver visning/ filtering klik 
+	liste.textContent= ""; //Tøm visningscontainer efter hver visning filtering klik 
 	produkter.forEach(produkt => {
 		if ((filterFarve == "alle" || produkt.farve.includes(parseInt(filterFarve))) &&
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&
@@ -453,7 +447,7 @@ document.querySelector(".nulstil").addEventListener("click", funcNulstil);
 
 function funcNulstil() {
   filterPris = "alle";
-  filterTojer = "alle";
+  filterCat = "alle";
   filterStr = "alle";
   filterMrke = "alle";
   filterFarve = "alle";

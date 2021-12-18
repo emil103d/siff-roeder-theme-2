@@ -267,7 +267,6 @@ grid-column: 2;
 
  .knapper .hjerteValgt{
 	display: none;
-	  margin: 12px;
 }
 
 .knapper .reserver {
@@ -285,9 +284,11 @@ grid-column: 2;
     margin: 14px; */
 }
 
-/* button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type="reset"]:hover, input[type="reset"]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
-	transform: scale(1.1);
-} */
+button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type="reset"]:hover, input[type="reset"]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+    text-decoration: underline !important;
+    background-color: transparent;
+    color: #C3C8BE !important;
+}
 
 /* .knapper .reserver button:hover {
 	background-color: white;
@@ -312,6 +313,8 @@ grid-column: 2;
 	border: solid 0.5px #26222f;
 	
 } 
+
+
 
 	 /* ------------------ MOBILE ABOWE - WEB BELOW ------------ */
 @media (min-width:600px)  { 
@@ -709,47 +712,7 @@ function funcValgt() {
 	 this.classList.add("valgt"); // for hver knap add valgt 
 	 
 }
-
-	// strKnapper.forEach(strKnap => {
-	// 	strKnap.addEventListener("click", funcRemoveValgt);
-	// })
-
-//}
-
-// function funcValgt(){
-// 	if (this.contains("valgt") {
-// 		this.classList.remove("valgt")
-// 	}) else {
-// 		this.classList.add("valgt")
-// 	}
-// }
-
-
-// function funcValgt() {
-//     console.log("anders");
-// 	 this.classList.remove("valgt");
-//            // tilføj .valgt til den valgte
-//             this.classList.toggle("valgt");
-
-			// if (this.classList.contains("valgt")) {
-			// // funcRemoveValgt();
-			// this.classList.remove("valgt");
-			// }
-
-	// function funcRemoveValgt() {
-	// 	 this.classList.remove("valgt");
-	
-	// }
-
-
-	// strKnapper.classList.remove("valgt");
-           // tilføj .valgt til den valgte
-            // this.classList.add("valgt");
-
-//}
-
-
-
+ 
 // lav eventlisterner inden i størrelse funktionen der lytter til alle buttons  fjerne alle classes og  tilføj en classs
 
 //--------------------- Vis mærker-----------------

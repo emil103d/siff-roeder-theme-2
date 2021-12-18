@@ -21,20 +21,52 @@ get_header(); ?>
 
 <style>
 
-h1 {
-  font-size: 2.5rem;
-  margin: auto;
-  text-align: center;
+.mere {
+  background-color: #66745A; 
+  padding: 0.5rem;
+  color: white;
+  font-weight: 900;
 }
+
+.mere:hover {
+  transform: scale(1.1);
+  background-color: #C3C8BE; 
+  text-decoration: none;
+}
+
+.koster {
+  margin-bottom: 0;
+}
+
+#filter-button-1 {
+	margin-bottom: 3rem;
+    background-color: #a5886585;
+	color: white;
+}
+
+filter-button-1 {
+	background-color: #C3C8BE;
+}
+
+
+ @media (min-width: 600px) {
+  #page_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+  }
+
+}
+
+ 
 
 </style>
 
 
-<main class="page_toj"> 
-
-<h1>Tøj</h1>
-<!-- ----------Filter knapper ------------->
+<main class="alle_produkter">
+	<h1>Tøj</h1>
 <section id="page_wrapper">
+<!-- ----------Filter knapper ------------->
+
 <div class="parent">
 		<div class="filter">
 			<div class="filter-item">
@@ -105,15 +137,13 @@ h1 {
 				</div>
 		</div> 
 	</div>
-
-  <button class="nulstil">Nulstil</button>
-
+	  <button class="nulstil">Nulstil</button>
 </div> 
 </div> 
 
 <!-- ----------produkter-oversigt ------------->
 
-<section id="produkter-oversigt"></section> 
+<section id="produkter-oversigt"></section>
 </section>
 <template>
 <article class="enkelt_produkt">
@@ -124,16 +154,17 @@ h1 {
 </div>
 
 <div class="knapper">
-<button class="reserver">Reserver </button>
+<!-- <button class="reserver">Reserver </button> -->
 <button class="mere">Læs mere</button>
 </div>
 </article>
 </template>
 
+</div>
+
   <button id="btnScrollToTop">
         <i class="material-icons">arrow_upward</i>
       </button>
-
 
 </main>
 
@@ -142,14 +173,6 @@ h1 {
 
 let temp = document.querySelector("template");
 const liste = document.querySelector("#produkter-oversigt");
-
-let produkter = [];
-let tojer = [];
-let farver = [];
-let maerker = [];
-let storrelser = [];
-let priser = [];
-
 
 let filterTojer = "alle";
 let filterFarve = "alle";
@@ -166,10 +189,14 @@ start();
 	async function getJson() {
 
 	// hent produkt
-	const url = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt/?per_page=100"; // indsæt url for at hente alle produkter
+	const url = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/produkt/?per_page=100"; 
 	let data = await fetch(url);
 	produkter = await data.json();
 
+	// hent tøj produkt
+  	const tojUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/toj";
+    const tojData = await fetch(tojUrl);
+    tojer = await tojData.json();   
 
 	// hent farve produkt
 	const farveUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/farve"; // indsæt url for at hente alle farve 
@@ -191,10 +218,7 @@ start();
 	const prisData = await fetch(prisUrl);
 	priser = await prisData.json();	
 
-		// hent tøj produkt 
-	const tojUrl = "https://www.amadeusnoah.dk/kea/semester_2/10_eksamensprojekt/siff_roeder_v2/wp-json/wp/v2/toj";
-	const tojData = await fetch(tojUrl);
-	tojer = await tojData.json();	
+	
 
 
 	visProdukter();
@@ -204,7 +228,7 @@ start();
 	
 function visProdukter() { 
 	console.log("hej");
-	liste.textContent= "";
+	liste.textContent= ""; //Tøm visningscontainer efter hver visning/ filtering klik 
 	produkter.forEach(produkt => {
 		if ((filterFarve == "alle" || produkt.farve.includes(parseInt(filterFarve))) &&
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&
@@ -241,7 +265,8 @@ function visProdukter() {
             })
 			  addEventListenersToButtons();
 
-		storrelser.forEach(strrelse=>{
+
+		sorterFunc(storrelser).forEach(strrelse=>{
 		  if(strrelse.name != "Ikke-kategoriseret"){
      		document.querySelector(".dropdown-content4").innerHTML += `<button class="filter" data-strrelse="${strrelse.id}">${strrelse.name}</button>`
                 }
@@ -255,14 +280,23 @@ function visProdukter() {
             })
 			  addEventListenersToButtons();
 		
-		tojer.forEach(toj=>{
-		  if(toj.name != "Ikke-kategoriseret"){
-     		document.querySelector(".dropdown-content6").innerHTML += `<button class="filter" data-toj="${toj.id}">${toj.name}</button>`
+		   tojer.forEach(toj=>{
+          if(toj.name != "Ikke-kategoriseret"){
+            document.querySelector(".dropdown-content6").innerHTML += `<button class="filter" data-toj="${toj.id}">${toj.name}</button>`
                 }
             })
-			  addEventListenersToButtons();	  
+              addEventListenersToButtons();   
 
 		}
+
+
+// Her skal storrelser løbes igennem og sorteres som i single produkt
+function sorterFunc(array){
+	array.sort((a,b) => {
+	return a.id - b.id;
+});
+return array;
+}
 	
 
 //-- ----------Lav harmonika ------------->
@@ -378,6 +412,7 @@ function filtreringStr() {
             visProdukter();
         }
 
+
 	//-- ----------Pris filtrering ------------->
 
 function filtreringPris() {
@@ -404,9 +439,10 @@ function filtreringToj() {
             visProdukter();
         }
 
+
 	//-- ----------Nulstil ------------->
 
-  document.querySelector(".nulstil").addEventListener("click", funcNulstil);
+document.querySelector(".nulstil").addEventListener("click", funcNulstil);
 
 function funcNulstil() {
   filterPris = "alle";
@@ -418,7 +454,7 @@ function funcNulstil() {
   visProdukter()
 }
 
-//-- ----------ScrollToTop ------------->
+	//-- ----------ScrollToTop ------------->
 const ScrollToTop = document.querySelector("#btnScrollToTop");
 
 ScrollToTop.addEventListener("click", () => {
