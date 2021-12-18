@@ -21,100 +21,39 @@ get_header(); ?>
 
 <style>
 
-  .filter button {
-    /*basis layout af knappen*/
-    position: relative;
-    display: block;
-    text-align: left;
-    width: 100%;
-    padding: 2em 0;
-	font-size: 1rem;
-  }
-
-  .filter button .icon {
-  /*Her bliver ikonet bygget (cirklen)*/
-  display: inline-block;
-  position: absolute;
-  top: 14px;
-  right: 0;
-  width: 48px;
-  height: 48px;
-  border: 1px solid;
-  border-radius: 22px;
+.mere {
+  background-color: #66745A; 
+  padding: 0.5rem;
+  color: white;
+  font-weight: 900;
 }
 
-	.filter button .icon::before {
-  /*Vertikal stregen inden i cirklen */
-  display: block;
-  position: absolute;
-  content: "";
-  top: 20px;
-  left: 13px;
-  width: 17px;
-  height: 2px;
-  background: currentColor; /*parent elementets farve */
-}
-.filter button .icon::after {
-  /*Horizontal stregen inden i cirklen*/
-  display: block;
-  position: absolute;
-  content: "";
-  top: 13px;
-  left: 20px;
-  width: 2px;
-  height: 17px;
-  background: currentColor;
+.mere:hover {
+  transform: scale(1.1);
+  background-color: #C3C8BE; 
+  text-decoration: none;
 }
 
-.enkelt_produkt {
-  max-width: 1200px;
-  display: grid;
-  text-align: center;
-  margin: 0;
+.koster {
+  margin-bottom: 0;
 }
 
-button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type=reset]:hover, input[type=reset]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
-	text-decoration: underline;
-	background-color: transparent;
- }
+#filter-button-1 {
+	margin-bottom: 3rem;
+    background-color: #a5886585;
+	color: white;
+}
+
+filter-button-1 {
+	background-color: #C3C8BE;
+}
+
 
  @media (min-width: 600px) {
   #page_wrapper {
     display: grid;
     grid-template-columns: 1fr 7fr;
   }
-
-    .filter button {
-    /*basis layout af knappen*/
-    position: relative;
-    display: block;
-    text-align: left;
-    width: 100%;
-    padding: 1em 0;
-  }
-
-  .filter button .icon::before {
-    /*Vertikal stregen inden i cirklen */
-    top: 9px;
-    left: 5px;
-    width: 10px;
-    height: 2px;
-    background: currentColor; /*parent elementets farve */
-  }
-  .filter button .icon::after {
-    /*Horizontal stregen inden i cirklen*/
-    top: 5px;
-    left: 9px;
-    width: 2px;
-    height: 10px;
-  }
-
-    .filter button .icon {
-  /*Her bliver ikonet bygget (cirklen)*/
-  width: 22px;
-  height: 22px;
-
-}
 
 }
 
@@ -215,7 +154,7 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 </div>
 
 <div class="knapper">
-<button class="reserver">Reserver </button>
+<!-- <button class="reserver">Reserver </button> -->
 <button class="mere">Læs mere</button>
 </div>
 </article>
@@ -296,7 +235,7 @@ start();
 	
 function visProdukter() { 
 	console.log("hej");
-	liste.textContent= "";
+	liste.textContent= ""; //Tøm visningscontainer efter hver visning/ filtering klik 
 	produkter.forEach(produkt => {
 		if ((filterFarve == "alle" || produkt.farve.includes(parseInt(filterFarve))) &&
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&

@@ -16,12 +16,6 @@ get_header(); ?>
 
 <style>
 
-:root {
-	--text: #7F7F7F;
-	--green: #7F7F7F;
-	--grey: #56605F;
-}
-
 .single p {
 	margin-bottom: 0;
 }
@@ -74,6 +68,18 @@ get_header(); ?>
 .knapper {
 	justify-content: center;
 	display: flex;
+}
+
+.farve button {
+	border: solid 1px;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+.storrelse button{
+	border: solid 1px;
+    padding: 0.5rem;
+    margin: 1rem;
 }
 
 /* ------------harmonika -------------*/
@@ -261,12 +267,32 @@ grid-column: 2;
 
  .knapper .hjerteValgt{
 	display: none;
+	  margin: 12px;
 }
 
 .knapper .reserver {
-	border: solid 0.5px #26222f;
+	    background-color: #647658;
+		color: white;
+		padding: 1rem;
+    margin: 14px;
 }
 
+.knapper .reserver:hover {
+	    background-color: #C3C8BE;
+ 		 text-decoration: none;		
+		/* color: white;
+		padding: 1rem;
+    margin: 14px; */
+}
+
+/* button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type="reset"]:hover, input[type="reset"]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
+	transform: scale(1.1);
+} */
+
+/* .knapper .reserver button:hover {
+	background-color: white;
+	transform: scale(1.1);
+}  */
 
 .h3 {
 	margin-top: 4rem;
@@ -385,6 +411,8 @@ grid-column: 2;
 .valgt  {
  	border-color: black;
     border-style: solid;
+	background-color: #C3C8BE;
+	color: white;
 }
 }
 
@@ -624,14 +652,27 @@ document.querySelector(".reserver").addEventListener("click", () => visDetaljer(
 
 //--------------------- Vis farve-----------------
 
+let faverKnapper; // tomt array
+
 function visFarve(){
 	farver.forEach(color=>{
 		if (produkt.farve.includes(parseInt(color.id)))
 		document.querySelector(".farve").innerHTML += `<button data-farve="${color.id}">${color.name}</button>`
+		faverKnapper = document.querySelectorAll(".farve button");
+		faverKnapper.forEach(faverKnap => { // for hver knap lav en eventlistener
+		faverKnap.addEventListener("click", funcValgtF);
             })
+	})
+}
 
-	 document.querySelector(".farve button").addEventListener("click", funcValgt);
-
+function funcValgtF() {
+	faverKnapper.forEach(knap => { // for hver knap fjern knap
+		knap.classList.remove("valgt")
+		
+	})
+	
+	 this.classList.add("valgt"); // for hver knap add valgt 
+	 
 }
 
 //--------------------- Vis str-----------------
@@ -643,24 +684,71 @@ function funcStr(){
 		visStr()
 }
 
-function visStr(){
+let strKnapper; // tomt array
+
+function visStr(){	
 	storrelser.forEach(storrelse=>{
 		if (produkt.strrelse.includes(parseInt(storrelse.id)))
-		document.querySelector(".storrelse").innerHTML += `<button data-strrelse="${storrelse.id}">${storrelse.name}</button>`
+		document.querySelector(".storrelse").innerHTML += `<button data-strrelse="${storrelse.id}">${storrelse.name}</button>` // Få knapper
+	
+		strKnapper = document.querySelectorAll(".storrelse button");
+		strKnapper.forEach(strKnap => { // for hver knap lav en eventlistener
+		strKnap.addEventListener("click", funcValgt);
+		
 	})
 
-	let strKnapper = document.querySelectorAll(".storrelse button");
-	strKnapper.forEach(strKnap => {
-		strKnap.addEventListener("click", funcValgt);
 	})
-}
+	}
 
 function funcValgt() {
-    console.log("anders");
-	 this.classList.remove("valgt");
-           // tilføj .valgt til den valgte
-            this.classList.add("valgt");
+	strKnapper.forEach(knap => { // for hver knap fjern knap
+		knap.classList.remove("valgt")
+		
+	})
+	
+	 this.classList.add("valgt"); // for hver knap add valgt 
+	 
 }
+
+	// strKnapper.forEach(strKnap => {
+	// 	strKnap.addEventListener("click", funcRemoveValgt);
+	// })
+
+//}
+
+// function funcValgt(){
+// 	if (this.contains("valgt") {
+// 		this.classList.remove("valgt")
+// 	}) else {
+// 		this.classList.add("valgt")
+// 	}
+// }
+
+
+// function funcValgt() {
+//     console.log("anders");
+// 	 this.classList.remove("valgt");
+//            // tilføj .valgt til den valgte
+//             this.classList.toggle("valgt");
+
+			// if (this.classList.contains("valgt")) {
+			// // funcRemoveValgt();
+			// this.classList.remove("valgt");
+			// }
+
+	// function funcRemoveValgt() {
+	// 	 this.classList.remove("valgt");
+	
+	// }
+
+
+	// strKnapper.classList.remove("valgt");
+           // tilføj .valgt til den valgte
+            // this.classList.add("valgt");
+
+//}
+
+
 
 // lav eventlisterner inden i størrelse funktionen der lytter til alle buttons  fjerne alle classes og  tilføj en classs
 

@@ -1,5 +1,7 @@
 /* Version 1.6 */
 
+/* -----------Basic CSS ------------ */
+
 :root {
   --text: #7f7f7f;
   --grey: #56605f;
@@ -26,7 +28,7 @@ img {
   margin: 0;
 }
 
-/*          Fjern fokus  */
+/*  ---Fjern fokus fra knapper--- */
 button:focus,
 .menu-toggle:hover,
 button:hover,
@@ -43,120 +45,6 @@ input[type="submit"]:hover,
 input[type="submit"]:focus {
   text-decoration: underline;
   background-color: transparent;
-}
-
-/*------------ Filter knapper------------ */
-
-.valgt {
-  background-color: red;
-  border-color: #ffc502;
-  border-style: solid;
-}
-
-.parent {
-  padding: 4rem;
-  width: 20rem;
-}
-
-.filter .filter-item {
-  /*Linje under knap*/
-  border-bottom: 1px solid var(--grey);
-}
-.filter .filter-item button[aria-expanded="true"] {
-  /*Linje under tekst når knappen er expanded*/
-  border-bottom: 1px solid var(--green);
-}
-
-.filter button {
-  /*basis layout af knappen*/
-  position: relative;
-  display: block;
-  text-align: left;
-  width: 100%;
-  padding: 1rem 0;
-  border: none;
-  background: none;
-  outline: none;
-  font-size: 1rem;
-}
-.filter button:hover,
-.filter button:focus {
-  /*Pseudo elementer der gør at når man har klikket eller kører musen over skifter den farve */
-  cursor: pointer;
-  color: var(--green);
-}
-.filter button:hover::after,
-.filter button:focus::after {
-  cursor: pointer;
-  color: var(--green);
-  border: 1px solid #03b5d2;
-}
-.filter button .filter-title {
-  padding: 1em 1.5em 1em 0;
-}
-.filter button .icon {
-  /*Her bliver ikonet bygget (cirklen)*/
-  display: inline-block;
-  position: absolute;
-  top: 14px;
-  right: 0;
-  width: 22px;
-  height: 22px;
-  border: 1px solid;
-  border-radius: 22px;
-}
-.filter button .icon::before {
-  /*Vertikal stregen inden i cirklen */
-  display: block;
-  position: absolute;
-  content: "";
-  top: 9px;
-  left: 5px;
-  width: 10px;
-  height: 2px;
-  background: currentColor; /*parent elementets farve */
-}
-
-.filter button .icon::after {
-  /*Horizontal stregen inden i cirklen*/
-  display: block;
-  position: absolute;
-  content: "";
-  top: 5px;
-  left: 9px;
-  width: 2px;
-  height: 10px;
-  background: currentColor;
-}
-.filter button[aria-expanded="true"] {
-  /*Dette virker kun hvis aria-expeneded er true*/
-  color: var(--green);
-}
-.filter button[aria-expanded="true"] .icon::after {
-  /*Inden i knappen går man til ikonet og ændre after så hvis man har trykket på knapper forsvinder stregen*/
-  width: 0;
-}
-.filter button[aria-expanded="true"] + .filter-content {
-  /*Hvis aria expanded er true skal harmonika content kunne ses (teksten)*/
-  opacity: 1;
-  max-height: 30em;
-  transition: all 200ms linear;
-}
-.filter .filter-content {
-  /*Som default (grundlæggende) skal teksten ikke kunne ses*/
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: opacity 200ms linear, max-height 200ms linear;
-}
-
-.filter-item button {
-  font-weight: 400;
-}
-
-.filter-content button {
-  font-weight: 400;
-  font-size: 0.6125rem;
 }
 
 .page_toj {
