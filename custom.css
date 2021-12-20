@@ -202,7 +202,8 @@ img {
 }
 
 .alle_produkter {
-  margin: 20px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .alle_produkter h1 {

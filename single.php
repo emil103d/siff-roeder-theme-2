@@ -16,12 +16,24 @@ get_header(); ?>
 
 <style>
 
+.single {
+}
+
 .single p {
 	margin-bottom: 0;
 }
 
+.ast-container {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 .billeder {
 	display: none;
+}
+
+.billeder img {
+	height: auto;
 }
 
 .knapper .material-icons {
@@ -31,16 +43,23 @@ get_header(); ?>
 .knap_left {
     position: absolute;
     left: 0; bottom: 50%;
+	color: white;
  }
 
-  .knap_right {
+.knap_right {
     position: absolute;
     right: 0; bottom: 50%;
+	color: white;
  }
 
 
  .stort-billede {
 	position: relative;
+	text-align: center;
+}
+
+.main-billede {
+	max-height: 50vh;
 }
 
 .maerker {
@@ -63,6 +82,8 @@ get_header(); ?>
 .modellen_er {
 	text-decoration: underline;
 	font-size: 0.7em;
+	margin-top: 0.5em;
+	margin-bottom: 1rem;
 }
 
 .knapper {
@@ -72,21 +93,55 @@ get_header(); ?>
 
 .farve button {
 	border: solid 1px;
-    padding: 0.5rem;
-    margin: 1rem;
+    padding: 0.3rem;
+    margin-left: 1rem;
+	font-size: 0.75rem;
+}
+
+.storrelse {
+	margin-top: 1rem;
 }
 
 .storrelse button{
 	border: solid 1px;
-    padding: 0.5rem;
-    margin: 1rem;
+    padding: 0.3rem;
+    margin-left: 1rem;
+	font-size: 0.75rem;
+	min-width: 30px;
 }
+
+img {
+	width: 100%;
+	object-fit: cover;
+	object-position: top;
+}
+
+.rela_section {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.harmonika {
+	padding-bottom: 4rem;
+}
+
+.reserver {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	margin-left: 0rem;
+	margin-right: 0rem;
+}
+
+.wp-image-1583 {
+	max-width: 154px;
+}
+
 
 /* ------------harmonika -------------*/
 
 .container {
   /* padding: 4rem;
-  width: 48rem; */      
+  width: 48rem; */
   grid-column: 2;
   grid-row: 2 / 3;
 }
@@ -273,23 +328,39 @@ grid-column: 2;
 	    background-color: #647658;
 		color: white;
 		padding: 1rem;
-    margin: 14px;
 }
 
 .knapper .reserver:hover {
-	    background-color: #C3C8BE;
+	    background-color: #A5B19EF7;
  		 text-decoration: none;		
+		  color: white;
 		/* color: white;
 		padding: 1rem;
     margin: 14px; */
 }
 
 button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-button:hover .button:hover, .ast-custom-button:hover, input[type="reset"]:hover, input[type="reset"]:focus, input#submit:hover, input#submit:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {
-    text-decoration: underline !important;
-    background-color: transparent;
-    color: #C3C8BE !important;
+    background-color: #A5B19EF7;
+	border: none;
 }
 
+.hjerte:hover {
+	background-color: transparent;
+	color: black !important;
+}
+
+.hjerteValgt:hover {
+	background-color: transparent;
+	color: black;
+}
+
+.harmonika-item button:hover {
+	background-color: transparent;
+}
+
+.harmonika-item button:focus {
+	background-color: transparent !important;
+}
 /* .knapper .reserver button:hover {
 	background-color: white;
 	transform: scale(1.1);
@@ -302,35 +373,98 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 
 	 /* ------------------ Relaterede produkt------------ */
 
- .rela h4 {
-	text-align: center;
-	
+#kasse {
+padding-top: 1rem;
+}
+
+.rela h4 {
+
 }
 
 .mere {
 	display: block; 
-	margin: 0 auto;
 	border: solid 0.5px #26222f;
-	
+	background-color: #647658;
+	color: white;
 } 
+
+.rela_article {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.main_billede {
+	max-height: 50vh;
+	grid-column: 1/5;
+	grid-row: 1/4;
+}
+
+.rela {
+	grid-column: 1/4;
+	grid-row: 4/5;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.mere {
+	grid-column: 4/5;
+	grid-row: 4/5;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding: 10px;
+}
+
+.knapper {
+	display: grid;
+	grid-template-columns: 75% 25%;
+}
+
+.reserver {
+	grid-column: 1;
+}
+
+.koster  {
+	margin: 0px;
+}
+
+.navn {
+	margin: 0px;
+}
+
+
+
 
 
 
 	 /* ------------------ MOBILE ABOWE - WEB BELOW ------------ */
 @media (min-width:600px)  { 
 
+	.ast-container  {
+		margin: auto;
+	}
+
+	.single {
+		padding-bottom: 100px;
+	}
+
+	.main-billede {
+	max-height: 80vh;
+}
 
 .single_produkt {
 	display: grid;
 	grid-template-columns: 0.3fr 2fr 2fr;
 	margin: 1rem auto;
 	gap: 25px;
+	padding-top: 100px;
 }
 
 .billeder {
 	display: grid;
 	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 	grid-column: 1;
+	gap: 20px;
 }
 
 .forfra_billede {
@@ -350,6 +484,7 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 
 .stort-billede {
 	grid-column: 2;
+
 }
 
 .info {
@@ -383,15 +518,21 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 /* ------------Relaterede produkter -------------*/
 
 .rela_section {
-	margin: 1rem 2rem;
 		grid-column: 1 / 3;
+		max-width: 1200px;
+		margin: auto;
+		padding: 0px;
+}
+
+.main_billede {
+	max-height: 100vh;
 }
 
 #kasse {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	margin: 1rem auto;
-	gap: 1rem;
+	gap: 25px;
 }
 
 .rela_article {
@@ -403,12 +544,17 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 
 .rela .navn {
 	grid-column: 1 / 2;
+}
 
+	
+.rela {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	padding: 0px;
 }
 
 .rela .koster  {
 	grid-column: 2 / 3;
-}
 }
 
 .valgt  {
@@ -417,9 +563,15 @@ button:focus, .menu-toggle:hover, button:hover, .ast-button:hover, .ast-custom-b
 	background-color: #C3C8BE;
 	color: white;
 }
+
+.mere {
+	margin-top: 1.6rem;
+	margin-bottom: 1.6rem;
+	padding-right: 20px;
+	padding-left: 20px;
 }
 
-
+}
 
 </style>
 
@@ -469,17 +621,15 @@ navigate_next
 
 <!----------------- Harmonika  ----------------------->
 
-
-<div class="container"> <!-- Her oprettes der container -->
-<div class="harmonika"> <!-- Her oprettes der harmonika kassen -->
-	<div class="harmonika-item"> <!-- Hver enkelte harmonikaelement i harmonika kasse -->
-		<button id="harmonika-button-1" aria-expanded="false"> <!-- som default er aria-expanded false  -->
-		<span class="harmonika-title>">Om Reservation</span> <!-- span harmonika titel  -->
-		<span class="icon" aria-hidden="true"></span> <!--Her vises ikonet, men som default er den true, da det ikke kan ses-->
+<div class="container">
+<div class="harmonika">
+	<div class="harmonika-item">
+		<button id="harmonika-button-1" aria-expanded="false">
+		<span class="harmonika-title>">Hvordan fungerer en reservation?</span>
+		<span class="icon" aria-hidden="true"></span>
 		</button>
-	<div class="harmonika-content"> <!-- Her er kassen, med content når der klikkes på knappen-->
-	<p>Du kan reservere tøjet gratis, så gør vi det klar til at du kan prøve 
-	det i butikken og herefter kan du udvælge det du gerne vil købe.
+	<div class="harmonika-content">
+	<p>Du kan reservere tøjet gratis, så gør vi det klar til at du kan prøve det i butikken og herefter kan du udvælge det du gerne vil købe.
 		Bare rolig der er ingen bindning, vi ønsker at du kun kommer hjem med det du virkelig elsker. 
 		Der er altid 30 dages gratis retur, hvis du ønsker at returnere dine varer.</p>
  </div>

@@ -39,9 +39,9 @@ get_header(); ?>
 }
 
 #filter-button-1 {
-	margin-bottom: 3rem;
-    background-color: #a5886585;
-	color: white;
+	
+    background-color: transparent;
+	color: black;
 }
 
 filter-button-1 {
@@ -53,6 +53,11 @@ filter-button-1 {
   #page_wrapper {
     display: grid;
     grid-template-columns: 1fr 7fr;
+  }
+
+  .alle_produkter {
+	  padding-top: 100px;
+	  padding-bottom: 100px;
   }
 
 }
@@ -180,7 +185,7 @@ let filterFarve = "alle";
 let filterMrke = "alle";
 let filterStr = "alle";
 let filterPris = "alle";
-// 
+
 start();
 
 	function start() {
@@ -230,19 +235,19 @@ start();
 function visProdukter() { 
 	console.log("hej");
 	liste.textContent= ""; //Tøm visningscontainer efter hver visning filtering klik 
-	produkter.forEach(produkt => { //Filtrerer produkterne
+	produkter.forEach(produkt => {
 		if ((filterFarve == "alle" || produkt.farve.includes(parseInt(filterFarve))) &&
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&
 			 (filterStr == "alle" || produkt.strrelse.includes(parseInt(filterStr))) &&
 			 (filterPris == "alle" || produkt.pris.includes(parseInt(filterPris))) &&
 			 (filterCat == "alle" || produkt.kategori.includes(parseInt(filterCat))))    { //parseInt= laver datatypen om til et helt tal
-		const klon = temp.cloneNode(true).content; 
-		klon.querySelector("img").src = produkt.main_billede.guid; //Hvis billede
+		const klon = temp.cloneNode(true).content;
+		klon.querySelector("img").src = produkt.main_billede.guid;
 		klon.querySelector(".navn").textContent = produkt.title.rendered;
-		klon.querySelector(".koster").textContent = produkt.koster + " kr. "; //Hvis pris
+		klon.querySelector(".koster").textContent = produkt.koster + " kr. ";
 		klon.querySelector("article").addEventListener("click", () => 
 			{location.href = produkt.link;
-			}); // Ved klik kommer man hen til single produktet siden 
+			});
 		liste.appendChild(klon);
 		}
 	});

@@ -38,14 +38,19 @@ get_header(); ?>
   margin-bottom: 0;
 }
 
-#filter-button-1 {
-	margin-bottom: 3rem;
-    background-color: #a5886585;
-	color: white;
+#filter-button-1:hover {
+    background-color: #b38b7329;
 }
 
-filter-button-1 {
-	background-color: #C3C8BE;
+#filter-button-1 {	
+    background-color: transparent;
+	color: black;
+}
+
+button:focus {
+	background-color: transparent;
+}
+
 }
 
 
