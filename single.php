@@ -86,7 +86,7 @@ get_header(); ?>
 
 .container {
   /* padding: 4rem;
-  width: 48rem; */
+  width: 48rem; */      
   grid-column: 2;
   grid-row: 2 / 3;
 }
@@ -469,15 +469,17 @@ navigate_next
 
 <!----------------- Harmonika  ----------------------->
 
-<div class="container">
-<div class="harmonika">
-	<div class="harmonika-item">
-		<button id="harmonika-button-1" aria-expanded="false">
-		<span class="harmonika-title>">Reservér</span>
-		<span class="icon" aria-hidden="true"></span>
+
+<div class="container"> <!-- Her oprettes der container -->
+<div class="harmonika"> <!-- Her oprettes der harmonika kassen -->
+	<div class="harmonika-item"> <!-- Hver enkelte harmonikaelement i harmonika kasse -->
+		<button id="harmonika-button-1" aria-expanded="false"> <!-- som default er aria-expanded false  -->
+		<span class="harmonika-title>">Om Reservation</span> <!-- span harmonika titel  -->
+		<span class="icon" aria-hidden="true"></span> <!--Her vises ikonet, men som default er den true, da det ikke kan ses-->
 		</button>
-	<div class="harmonika-content">
-	<p>Du kan reservere tøjet gratis, så gør vi det klar til at du kan prøve det i butikken og herefter kan du udvælge det du gerne vil købe.
+	<div class="harmonika-content"> <!-- Her er kassen, med content når der klikkes på knappen-->
+	<p>Du kan reservere tøjet gratis, så gør vi det klar til at du kan prøve 
+	det i butikken og herefter kan du udvælge det du gerne vil købe.
 		Bare rolig der er ingen bindning, vi ønsker at du kun kommer hjem med det du virkelig elsker. 
 		Der er altid 30 dages gratis retur, hvis du ønsker at returnere dine varer.</p>
  </div>
@@ -536,7 +538,7 @@ navigate_next
 	<h3>Relaterede Produkter</h3>	
 	<section id="kasse"></section>
 	<template>	
-<article rela_article>
+<article class="rela_article">
 	<img class="main_billede" src="" alt="">
 	<div class="rela">
 	<h4 class="navn"></h4>

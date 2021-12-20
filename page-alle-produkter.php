@@ -180,7 +180,7 @@ let filterFarve = "alle";
 let filterMrke = "alle";
 let filterStr = "alle";
 let filterPris = "alle";
-
+// 
 start();
 
 	function start() {
@@ -230,19 +230,19 @@ start();
 function visProdukter() { 
 	console.log("hej");
 	liste.textContent= ""; //Tøm visningscontainer efter hver visning filtering klik 
-	produkter.forEach(produkt => {
+	produkter.forEach(produkt => { //Filtrerer produkterne
 		if ((filterFarve == "alle" || produkt.farve.includes(parseInt(filterFarve))) &&
 			 (filterMrke == "alle" || produkt.mrke.includes(parseInt(filterMrke))) &&
 			 (filterStr == "alle" || produkt.strrelse.includes(parseInt(filterStr))) &&
 			 (filterPris == "alle" || produkt.pris.includes(parseInt(filterPris))) &&
 			 (filterCat == "alle" || produkt.kategori.includes(parseInt(filterCat))))    { //parseInt= laver datatypen om til et helt tal
-		const klon = temp.cloneNode(true).content;
-		klon.querySelector("img").src = produkt.main_billede.guid;
+		const klon = temp.cloneNode(true).content; 
+		klon.querySelector("img").src = produkt.main_billede.guid; //Hvis billede
 		klon.querySelector(".navn").textContent = produkt.title.rendered;
-		klon.querySelector(".koster").textContent = produkt.koster + " kr. ";
+		klon.querySelector(".koster").textContent = produkt.koster + " kr. "; //Hvis pris
 		klon.querySelector("article").addEventListener("click", () => 
 			{location.href = produkt.link;
-			});
+			}); // Ved klik kommer man hen til single produktet siden 
 		liste.appendChild(klon);
 		}
 	});
